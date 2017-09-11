@@ -1,0 +1,28 @@
+<div class="row show-hide-messages">
+  <div [ngClass]='messageClass'>
+    {{ message }}
+  </div>
+</div>
+
+<h3>Welcome to blogapp!</h3>
+<h6>We have sent you an activation code. Please check your email inbox! Verify your email address, to use blogapp</h6>
+
+<form [formGroup]="form" (submit)='onactivateUserSubmit()'>
+  <div class="form-group">
+    <label for="activationCode">Activation Code:</label>
+    <div [ngClass]="{'has-error':form.controls.activationCode.errors && form.controls.activationCode.dirty, 'has-success': !form.controls.activationCode.errors && form.controls.activationCode.dirty  }">
+      <input type="text" name="activationCode" autocomplete="off" class="form-control" formControlName="activationCode">
+      <ul class="help-block">
+        <li *ngIf='form.controls.activationCode.errors?.required && form.controls.activationCode.dirty'>Please enter the activation code!</li>
+         <li *ngIf='form.controls.activationCode.errors?.minlength && form.controls.activationCode.dirty'>The activation code contains at least 5 characters</li> 
+      </ul>
+    </div>
+  </div>
+
+  <input [disabled]='!form.valid || processing' type="submit" name="submit" value="Activate Email" class="btn btn-block btn-primary">
+</form>
+
+
+<!-- <p>
+{{ form.controls.activationCode.value }}
+</p> -->

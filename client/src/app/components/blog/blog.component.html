@@ -1,0 +1,120 @@
+<h3>Blogs posts</h3>
+
+<div class="row show-hide-messages" *ngIf='message'>
+  <div [ngClass]='messageClass'>
+    {{ message }}
+  </div>
+</div>
+
+<div *ngIf='newPost'>
+  <h4>create a new blog</h4>
+  <form [formGroup]='form' (submit)='onNewBlogSubmit()'>
+    <div class="form-group">
+      <label for="title">Title</label>
+      <div [ngClass]="{'has-error': form.controls.title.errors && form.controls.title.dirty, 'has-success': !form.controls.title.errors && form.controls.title.dirty}">
+        <input class="form-control" type="text" name="title" formControlName='title' placeholder="blog title" autocomplete="off">
+        <ul class="help-block">
+          <li *ngIf='form.controls.title.errors?.required && form.controls.title.dirty'>Please enter title.</li>
+          <li *ngIf='form.controls.title.errors?.minlength && form.controls.title.dirty'>Minimum 5 characters required.</li>
+          <li *ngIf='form.controls.title.errors?.maxlength && form.controls.title.dirty'>Maximum 50 characters allowed.</li>
+          <li *ngIf='form.controls.title.errors?.alphaNumericValidation && form.controls.title.dirty'>Speacial characters not allowed.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="body">blog body</label>
+      <div [ngClass]="{'has-error': form.controls.body.errors && form.controls.body.dirty, 'has-success': !form.controls.body.errors && form.controls.body.dirty}">
+        <!-- <input class="form-control" type="text" name="body" formControlName='body' placeholder="blog body"> -->
+        <textarea rows="" cols="" class="form-control" type="text" name="body" formControlName='body' placeholder="blog body"></textarea>
+        <ul class="help-block">
+          <li *ngIf='form.controls.body.errors?.required && form.controls.body.dirty'>Please enter body.</li>
+          <li *ngIf='form.controls.body.errors?.minlength && form.controls.body.dirty'>Minimum 5 characters required.</li>
+          <li *ngIf='form.controls.body.errors?.maxlength && form.controls.body.dirty'>Maximum 500 characters allowed.</li>
+        </ul>
+      </div>
+    </div>
+
+    <input [disabled]="!form.valid" type="submit" value="create blog" class="btn btn-block btn-success">
+  </form>  
+  <br>
+  <a class="btn btn-warning btn-block" (click)='onBack()'>Go back</a>
+</div>
+
+  <!-- <p>{{ form.controls.title.value }}</p> -->
+
+
+<br>
+<button type="button" name="button" class="btn btn-warning" (click)="newBlogForm()" *ngIf='!newPost'>New Post</button>
+<button [disabled]="loadingBlogs" type="button" name="button" class="btn btn-default" (click)="reloadBlogs()" *ngIf='!newPost'>
+  <span class="glyphicon glyphicon-repeat"></span>&nbsp;&nbsp;Reload</button>
+
+<div *ngIf='!newPost'>
+  <div class="panel panel-default" *ngFor='let blog of blogPosts'>
+    <div class="panel-heading">
+       <h4> {{ blog.title }} </h4>
+    </div>
+
+  <div class="panel-body">
+      <p>
+          {{ blog.body }}
+      </p>
+  </div>
+
+  <div class="panel-footer">
+      <div class="row">
+          <div id="blogAuthor" class="col-md-6">
+            <strong>Posted by: </strong>
+            <span> {{ blog.createdBy }} </span>
+          </div>
+          <div id="blogDate" class="col-md-6">
+            <strong>Date:</strong>
+            <span> {{ blog.createdAt | date:'MMM dd, yyyy' }} </span>
+          </div>
+      </div>
+
+     
+        
+      <div *ngIf='username === blog.createdBy'>
+        <div id="likes" class="col-md-2">
+          <strong> <span class="glyphicon glyphicon-thumbs-up"></span> likes:</strong> {{ blog.likes }}
+        </div>
+        <div id="dislikes" class="col-md-2">
+          <span class="glyphicon glyphicon-thumbs-down"></span>    <strong> dislikes:</strong>{{ blog.dislikes }}
+        </div>
+          
+          <a [routerLink]="['/edit-blog',blog._id]">
+            <button type="button" class="btn btn-sm btn-info">Edit</button>
+          </a>
+          <a [routerLink]="['/delete-blog',blog._id]">
+            <button type="button" class="btn btn-sm btn-danger">Delete</button>
+          </a>  
+      </div>  
+      
+      <div *ngIf='username !== blog.createdBy'>
+        <!--likes dropdown  -->
+        <div class="dropdown">
+        <button  [disabled]="blog.likedBy.includes(username)" type="button" name="button" class="btn btn-sm btn-success" (click)='likeBlog(blog._id)'>
+          <span class="glyphicon glyphicon-thumbs-up">&nbsp;&nbsp;like: {{ blog.likes }}</span>
+        </button>
+          <div class="dropdown-content">
+              <!-- <a [routerLink]="['/user/', liker]" *ngFor="let liker of blog.likedBy">{{ liker }}</a> -->
+              <a *ngFor="let liker of blog.likedBy">{{ liker }}</a>
+          </div>
+        </div>
+
+        <!--dislikes dropdown  -->
+        <div class="dropdown">
+        <button [disabled]="blog.dislikedBy.includes(username)" type="button" name="button" class="btn btn-sm btn-danger" (click)='dislikeBlog(blog._id)'>
+          <span class="glyphicon glyphicon-thumbs-down">&nbsp;&nbsp;disLike: {{ blog.dislikes }}</span>
+        </button>
+        <div class="dropdown-content">
+            <!-- <a [routerLink]="['/user/', disliker]" *ngFor="let disliker of blog.dislikedBy">{{ disliker }}</a> -->
+            <a *ngFor="let disliker of blog.dislikedBy">{{ disliker }}</a>
+        </div>
+        </div>
+      </div>
+      
+  </div><!--footer ends  -->
+</div>
+</div>

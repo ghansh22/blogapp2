@@ -1,0 +1,17 @@
+@media screen and (min-width: 720px) {
+    .container{
+        padding: 0px 14% 0px; 
+    }
+}
+
+
+.footer-bottom {
+	margin-top: 25px; 
+	background: #E3E3E3;
+	border-top: 1px solid #DDDDDD;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.footer-bottom p.pull-left {
+	padding-top: 6px;
+}

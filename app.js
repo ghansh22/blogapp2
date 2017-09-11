@@ -36,14 +36,14 @@ app.use(cors({
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 // static folder
-app.use(express.static(__dirname+'/public/dist'));
+app.use(express.static(__dirname+'/public'));
 // authentication route
 app.use('/authentication',authentication);
 app.use('/blogs',blogs);
 
 // connect to index html in angular 2
 app.get('*',(req, res)=>{
-    res.sendFile(path.join(__dirname+'/public/dist/index.html'));
+    res.sendFile(path.join(__dirname+'/public/index.html'));
 });
 
 /* ==================================================

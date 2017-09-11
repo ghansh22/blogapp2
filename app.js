@@ -14,7 +14,7 @@ const blogs = require('./routes/blogs')(router);
 
 // vars
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 mongoose.connect(config.uri, (error) => {
     if(error){
@@ -49,6 +49,6 @@ app.get('*',(req, res)=>{
 /* ==================================================
 server
 ===================================================*/
-app.listen(port, ()=>{
-    console.log('listening on port: '+port);
+app.listen(this.port, ()=>{
+    console.log('listening on port: '+this.port);
 });

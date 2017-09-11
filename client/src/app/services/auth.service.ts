@@ -8,7 +8,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 @Injectable()
 export class AuthService {
 
-  domain = "http://localhost:8080/"
+  domain = ""
   authToken;
   user;
   options;

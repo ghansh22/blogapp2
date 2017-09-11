@@ -49,6 +49,6 @@ app.get('*',(req, res)=>{
 /* ==================================================
 server
 ===================================================*/
-app.listen(this.port, ()=>{
-    console.log('listening on port: '+this.port);
+app.listen(port, ()=>{
+    console.log('listening on port: '+port);
 });

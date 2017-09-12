@@ -5,7 +5,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const path = require('path');
-const cors = require('cors');
+// const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const config = require('./config/database');
@@ -29,9 +29,9 @@ mongoose.connect(config.uri, (error) => {
 Middlewares
 ===================================================*/
 // cors middleware
-app.use(cors({
-    origin: 'http://localhost:4200'
-}));
+// app.use(cors({
+//     origin: 'http://localhost:4200'
+// }));
 // bodyparser
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());

@@ -14,7 +14,7 @@ const blogs = require('./routes/blogs')(router);
 
 // vars
 const app = express();
-const port = process.env.PORT || 8080;
+const port = 8080;
 
 mongoose.connect(config.uri, (error) => {
     if(error){
@@ -36,14 +36,14 @@ app.use(cors({
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 // static folder
-app.use(express.static(__dirname+'/public'));
+app.use(express.static(__dirname+'/public/dist'));
 // authentication route
 app.use('/authentication',authentication);
 app.use('/blogs',blogs);
 
 // connect to index html in angular 2
 app.get('*',(req, res)=>{
-    res.sendFile(path.join(__dirname+'/public/index.html'));
+    res.sendFile(path.join(__dirname+'/public/dist/index.html'));
 });
 
 /* ==================================================

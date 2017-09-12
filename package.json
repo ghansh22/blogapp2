@@ -4,8 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "build": "cd client && ng build --prod && cd .. && node app.js"
+    "start": "node app.js"
   },
   "author": "ghanshyam baviskar",
   "license": "ISC",

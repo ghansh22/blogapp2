@@ -26,7 +26,8 @@ http://localhost:8080
 This application provides email verfication, to enable this please navigate to dir </br>
 /routes/authentication.js </br>
 open authentication.js file and find letMail function </br>
-replace email and password with your own email and password to send the user verification code.
+replace email and password with your own email and password to send the user verification code.</br>
+Then comment out letsMail fucntion on line number 97.. So than user will receive verification code and only verified users will be able to user blogApp
 
 
 

@@ -23,4 +23,11 @@ $npm build</br>
 and open in browser</br>
 http://localhost:8080
 
+This application provides email verfication, to enable this please navigate to dir </br>
+/routes/authentication.js </br>
+open authentication.js file and find letMail function </br>
+replace email and password with your own email and password to send the user verification code.
+
+
+
 

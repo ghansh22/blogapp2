@@ -1,7 +1,7 @@
 # blogapp
 This is a single page blog web application developed using MongoDb, Angular Js 2, Express Js, Node Js
 
-The deployed version of this application can be found here https://protected-brook-27447.herokuapp.com/
+The deployed version of this application can be found here https://calm-plateau-63316.herokuapp.com/
 
 # Requirements
 NodeJs,
